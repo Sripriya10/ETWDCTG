@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommuter | Team Gear Heads - Official Site</title>
+    <meta name="description" content="Official website of Team Gear Heads (ID: 2526023) for SAEINDIA ETWDC 2025. Explore our electric utility vehicle design, engineering specs, and sponsorship opportunities.">
+    
+    <!-- Dynamic Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+    <!-- 1. Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        /* FIX: Smooth Scrolling for navigation */
+        html { scroll-behavior: smooth; }
+
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e2e8f0; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Animations */
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.1; transform: scale(1); }
+          50% { opacity: 0.3; transform: scale(1.05); }
+        }
+        .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
+        
+        @keyframes shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+        .animate-shimmer { animation: shimmer 8s linear infinite; }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .animate-scanline { animation: scanline 3s linear infinite; }
+        
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow { animation: spin-slow 12s linear infinite; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+        
+        /* Slider Styling for Calculator */
+        input[type=range] {
+            -webkit-appearance: none; 
+            background: transparent; 
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #22d3ee;
+            cursor: pointer;
+            margin-top: -8px; 
+            box-shadow: 0 0 10px rgba(34,211,238,0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+    </style>
+
+    <!-- 3. React & ReactDOM via CDN -->
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "lucide-react": "https://esm.sh/lucide-react@0.263.1"
+      }
+    }
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- 4. The Application Logic -->
+    <script type="module">
+        import React, { useState, useEffect, useRef } from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { 
+          Zap, Menu, X, Hexagon, Maximize, Layers, Cpu, Activity, Smartphone, ExternalLink, 
+          Wind, ArrowRight, Download, CheckCircle, AlertCircle, ChevronRight, Gauge, Database, Sparkles, Loader2,
+          Scale, ShieldCheck, DollarSign, TrendingUp, Users, Award, Briefcase, Wrench, Lightbulb, Bluetooth,
+          Building, Mail, Phone, User, Check, Calculator, Power, Radio, Thermometer
+        } from 'lucide-react';
+
+        // --- CONFIGURATION ---
+        const AUTODESK_URL = "https://a360.co/48dexSr"; 
+        const GITHUB_LOGO_URL = "https://raw.githubusercontent.com/Sripriya10/portfolio-assets/main/IMG_20250419_210025.jpg"; 
+        const FORMSPREE_ID = "movgwzgq"; 
+
+        // --- DATA ---
+        const HERO_METRICS = [
+            { value: "35", unit: "km/h", label: "Max Speed" },
+            { value: "1.5", unit: "kW", label: "Peak Power" },
+            { value: "48", unit: "V", label: "System Voltage" },
+            { value: "85", unit: "kg", label: "Vehicle Weight" },
+        ];
+
+        const TEAM_GROUPS = [
+            {
+                title: "Design Team",
+                code: "DSGN-01",
+                desc: "CAD Modeling & Styling",
+                icon: Layers,
+                color: "text-cyan-400",
+                border: "group-hover:border-cyan-500/50",
+                bg: "group-hover:bg-cyan-500/5",
+                members: [
+                    { 
+                        name: "D. Nivas Reddy", 
+                        role: "Captain & Design Lead", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/WhatsApp%20Image%202025-12-03%20at%2011.21.00%20PM.jpeg",
+                        imagePosition: "object-top", 
+                        desc: "Leading vehicle architecture and subsystem integration. Ensuring strict compliance with SAEETWDC rulebook constraints." 
+                    },
+                    { 
+                        name: "Sai Teja", 
+                        role: "Design Engineer", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/WhatsApp%20Image%202025-12-03%20at%2011.20.59%20PM.jpeg",
+                        desc: "Specializing in Class-A surface modeling and cowling aesthetics to reduce aerodynamic drag and improve visual appeal." 
+                    },
+                    { 
+                        name: "Dhrithika Raj", 
+                        role: "Design Engineer", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/WhatsApp%20Image%202025-12-03%20at%209.06.27%20PM.jpeg",
+                        desc: "Focused on component packaging, wiring harness routing, and optimizing the ergonomic triangle for rider comfort." 
+                    }
+                ]
+            },
+            {
+                title: "Analysis",
+                code: "ANLY-02",
+                desc: "FEA & Simulation",
+                icon: Cpu,
+                color: "text-purple-400",
+                border: "group-hover:border-purple-500/50",
+                bg: "group-hover:bg-purple-500/5",
+                members: [
+                    { 
+                        name: "Sripriya Mallina", 
+                        role: "Analysis Head", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/profile%20pic.jpeg",
+                        desc: "Guided chassis optimization through rigorous FEA validation and material selection (AISI 1020), ensuring structural integrity and safety." 
+                    }
+                ]
+            },
+            {
+                title: "Transmission",
+                code: "TRNS-03",
+                desc: "Power Train",
+                icon: Wrench,
+                color: "text-amber-400",
+                border: "group-hover:border-amber-500/50",
+                bg: "group-hover:bg-amber-500/5",
+                members: [
+                    { 
+                        name: "Jahnavi J", 
+                        role: "Transmission Eng.", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/Screenshot_20250824_144348.jpg",
+                        desc: "Calculating optimal gear ratios and torque requirements to meet the 11° gradability and 4.5 Nm torque targets." 
+                    },
+                    { 
+                        name: "Akshaya Saraya", 
+                        role: "Transmission Eng.", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/WhatsApp%20Image%202025-12-03%20at%2010.13.43%20PM.jpeg",
+                        desc: "Designing the coupling mechanism for the secondary motor-generator system to enable hybrid charging efficiency." 
+                    },
+                    { 
+                        name: "Srinija K", 
+                        role: "Transmission Eng.", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/WhatsApp%20Image%202025-12-03%20at%209.31.52%20PM.jpeg",
+                        desc: "Analyzing powertrain efficiency and thermal dissipation strategies for the BLDC Hub motor under load." 
+                    }
+                ]
+            },
+            {
+                title: "Vehicle Dynamics",
+                code: "DYNM-04",
+                desc: "Suspension & Steering",
+                icon: Activity,
+                color: "text-emerald-400",
+                border: "group-hover:border-emerald-500/50",
+                bg: "group-hover:bg-emerald-500/5",
+                members: [
+                    { 
+                        name: "K. Ganesh", 
+                        role: "Suspension & Brakes", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/WhatsApp%20Image%202025-12-03%20at%2011.22.52%20PM%20(1).jpeg", 
+                        desc: "Simulating suspension travel and spring stiffness to balance ride comfort. Managing the hydraulic disc braking system for safety." 
+                    },
+                    { 
+                        name: "Kritika Rolla", 
+                        role: "Steering & Wheels", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/WhatsApp%20Image%202025-12-03%20at%2010.15.04%20PM.jpeg",
+                        desc: "Optimizing steering geometry, specifically Rake (25°) and Trail (53.6mm) angles, to ensure precise maneuverability." 
+                    },
+                    { 
+                        name: "Kartik Singh", 
+                        role: "Steering & Wheels", 
+                        image: "https://raw.githubusercontent.com/Sripriya10/ETWDCTG/main/WhatsApp%20Image%202025-12-03%20at%2010.19.32%20PM.jpeg",
+                        desc: "Managing wheel assembly selection (18-inch wheels, 12-inch rims) to minimize rolling resistance and ensure hub motor fitment." 
+                    }
+                ]
+            }
+        ];
+
+        const ENGINEERING_SPECS = [
+            { 
+                id: "chassis",
+                size: "large",
+                icon: Layers, 
+                title: "Chassis & Dynamics", 
+                subtitle: "AISI 1020 Steel Frame", 
+                desc: "Tubular chassis analyzed for multiple impact scenarios including frontal, side, and rollover conditions.",
+                stats: [{ label: "Overall FOS", value: "> 1.0", full: 100, curr: 100 }, { label: "Wheelbase", value: "1372mm", full: 1500, curr: 91 }]
+            },
+            { 
+                id: "battery",
+                size: "medium",
+                icon: Zap, 
+                title: "Energy Storage", 
+                subtitle: "48V 35Ah NMC Pack", 
+                desc: "13S10P Lithium-ion configuration with advanced BMS for over-charge/discharge protection.",
+                stats: [{ label: "Capacity", value: "1.7 kWh", full: 2.0, curr: 85 }]
+            },
+            { 
+                id: "motor",
+                size: "medium",
+                icon: Gauge, 
+                title: "Powertrain", 
+                subtitle: "1000W BLDC Hub", 
+                desc: "High-torque motor (4.5 Nm rated) with 1500W peak power. 11.34° Gradability.",
+                stats: [{ label: "Peak Torque", value: "4.5 Nm", full: 10, curr: 45 }]
+            },
+            { 
+                id: "smart",
+                size: "small",
+                icon: Bluetooth, 
+                title: "Smart Helmet", 
+                subtitle: "Alcohol Detection", 
+                desc: "Ignition disabled if alcohol is detected or rider is missing."
+            },
+            { 
+                id: "safety",
+                size: "small",
+                icon: ShieldCheck, 
+                title: "Safety Suite", 
+                subtitle: "Accident Alert", 
+                desc: "Auto-SMS/Call with GPS coordinates upon collision. Side-stand cutoff."
+            },
+            { 
+                id: "innov",
+                size: "large",
+                icon: Lightbulb, 
+                title: "Hybrid Charging", 
+                subtitle: "Secondary Motor-Gen", 
+                desc: "Innovative auxiliary charging system using a coupled secondary 48V motor to extend range.",
+                stats: [{ label: "Aux Charging", value: "Active", full: 100, curr: 100 }, { label: "Cost Efficiency", value: "High", full: 100, curr: 90 }]
+            } 
+        ];
+
+        const ROADMAP_STEPS = [
+            { phase: "Phase 1", status: "completed", title: "Design & CAE", date: "Completed", desc: "CAD Layout, Chassis Selection, and FOS Analysis approved." },
+            { phase: "Phase 2", status: "current", title: "Procurement", date: "In Progress", desc: "Sourcing BLDC Motor (₹5k) and Li-Ion Cells (₹20k). Chassis fabrication." },
+            { phase: "Phase 3", status: "future", title: "Integration", date: "Month 3", desc: "Smart Helmet sensor calibration, wiring harness, and secondary motor coupling." },
+            { phase: "Final Round", status: "future", title: "ETWDC 2025", date: "Competition", desc: "Dynamic validation: Brake Test, Gradability (11°), and Endurance." }
+        ];
+
+        const PARTNERSHIP_OPPORTUNITIES = [
+            {
+                id: "battery",
+                title: "Battery Sponsor",
+                icon: Zap,
+                desc: "Our highest cost item (₹20,000). Partner with us to power the heart of our vehicle.",
+                cta: "Sponsor Battery"
+            },
+            {
+                id: "motor",
+                title: "Motor Partner",
+                icon: Gauge,
+                desc: "Support our powertrain (₹5,000). Help us drive efficiency with the 1kW BLDC kit.",
+                cta: "Sponsor Motor"
+            },
+            {
+                id: "build",
+                title: "Fabrication Partner",
+                icon: Wrench,
+                desc: "Assist with machining and painting costs (₹10,800). Get your logo on the finished chassis.",
+                cta: "Support Build"
+            }
+        ];
+
+        // --- COMPONENTS ---
+
+        const FadeInWhenVisible = ({ children, delay = 0, className="" }) => {
+            const [isVisible, setVisible] = useState(false);
+            const domRef = useRef();
+
+            useEffect(() => {
+                const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => setVisible(entry.isIntersecting));
+                });
+                if (domRef.current) observer.observe(domRef.current);
+                return () => observer.disconnect();
+            }, []);
+
+            return React.createElement('div', {
+                ref: domRef,
+                className: `transition-all duration-1000 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${className}`,
+                style: { transitionDelay: `${delay}ms` }
+            }, children);
+        };
+
+        // --- 3D TILT CARD ---
+        const TiltCard = ({ children, className = "" }) => {
+            const cardRef = useRef(null);
+            const [coords, setCoords] = useState({ x: 0, y: 0 });
+            const [opacity, setOpacity] = useState(0);
+
+            const handleMouseMove = (e) => {
+                if (!cardRef.current) return;
+                const rect = cardRef.current.getBoundingClientRect();
+                const width = rect.width;
+                const height = rect.height;
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                const xPct = mouseX / width - 0.5;
+                const yPct = mouseY / height - 0.5;
+                setCoords({ x: xPct * 20, y: yPct * 20 });
+                setOpacity(1);
+            };
+
+            const handleMouseLeave = () => {
+                setCoords({ x: 0, y: 0 });
+                setOpacity(0);
+            };
+
+            return React.createElement('div', {
+                ref: cardRef,
+                onMouseMove: handleMouseMove,
+                onMouseLeave: handleMouseLeave,
+                className: `relative transition-all duration-200 ease-out ${className}`,
+                style: {
+                    transform: `perspective(1000px) rotateX(${coords.y * -1}deg) rotateY(${coords.x}deg) scale3d(1, 1, 1)`,
+                }
+            }, [
+                React.createElement('div', {
+                    key: "bg",
+                    className: "absolute inset-0 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm"
+                }),
+                React.createElement('div', {
+                    key: "spotlight",
+                    className: "pointer-events-none absolute -inset-px opacity-0 transition duration-300 rounded-2xl",
+                    style: {
+                        opacity,
+                        background: `radial-gradient(600px circle at ${50 + coords.x * 3}% ${50 + coords.y * 3}%, rgba(6,182,212,0.15), transparent 40%)`,
+                    }
+                }),
+                React.createElement('div', { key: "content", className: "relative h-full z-10" }, children)
+            ]);
+        };
+
+        // --- TECH CARD COMPONENT ---
+        const TechCard = ({ group, onClick }) => {
+            return React.createElement('div', { 
+                onClick: onClick,
+                className: `h-full relative bg-[#0a0a0a] border border-white/10 rounded-xl overflow-hidden transition-all duration-500 group cursor-pointer ${group.border} hover:shadow-lg hover:shadow-${group.color.split('-')[1]}-900/20` 
+            }, [
+                React.createElement('div', { key: "topbar", className: `absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500` }),
+                React.createElement('div', { key: "header", className: `p-6 border-b border-white/5 relative` }, [
+                    React.createElement('div', { key: "top", className: "flex justify-between items-start mb-2" }, [
+                        React.createElement('div', { key: "icon", className: `p-3 bg-white/5 rounded-lg ${group.color}` }, React.createElement(group.icon, { size: 24 })),
+                        React.createElement('div', { key: "code", className: "text-[10px] font-mono text-slate-600 tracking-widest" }, group.code)
+                    ]),
+                    React.createElement('h4', { key: "title", className: "text-xl font-bold text-white mt-2" }, group.title),
+                    React.createElement('p', { key: "desc", className: "text-xs text-slate-500 uppercase tracking-wider font-medium" }, group.desc),
+                ]),
+                React.createElement('div', { key: "members", className: `p-4 space-y-2 ${group.bg} transition-colors duration-500 h-full` }, 
+                    group.members.map((member, idx) => React.createElement('div', { 
+                        key: idx, 
+                        className: "flex items-center gap-4 p-3 rounded-lg border border-transparent hover:border-white/10 hover:bg-white/5 transition-all group/member" 
+                    }, [
+                        React.createElement('div', { key: "avatar", className: "relative shrink-0" }, [
+                            React.createElement('div', { className: `w-16 h-16 rounded-md bg-black border border-white/10 flex items-center justify-center text-slate-400 group-hover/member:text-white transition-colors overflow-hidden` }, 
+                                member.image ? React.createElement('img', { src: member.image, alt: member.name, className: `w-full h-full object-cover ${member.imagePosition || 'object-center'}` }) : React.createElement(User, { size: 24 })
+                            ),
+                            React.createElement('div', { className: `absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-black ${group.color.replace('text-', 'bg-')}` })
+                        ]),
+                        React.createElement('div', { key: "text" }, [
+                            React.createElement('div', { className: "text-sm font-bold text-slate-200 group-hover/member:text-white" }, member.name),
+                            React.createElement('div', { className: `text-[10px] font-bold uppercase tracking-wider ${group.color}` }, member.role)
+                        ])
+                    ]))
+                )
+            ]);
+        };
+
+        // --- ROI CALCULATOR ---
+        const ROICalculator = () => {
+            const [dailyKm, setDailyKm] = useState(30);
+            const [petrolPrice, setPetrolPrice] = useState(102);
+            const [electricityRate, setElectricityRate] = useState(6);
+            
+            const petrolCostPerDay = (dailyKm / 45) * petrolPrice;
+            const petrolCostYear = petrolCostPerDay * 300; 
+            const energyNeeded = (1.7 / 70) * dailyKm;
+            const evCostPerDay = energyNeeded * electricityRate;
+            const evCostYear = evCostPerDay * 300;
+            const savingsYear = petrolCostYear - evCostYear;
+            const savings5Years = savingsYear * 5;
+
+            return React.createElement('div', { className: "bg-[#0a0a0a] border border-white/10 p-8 rounded-2xl relative overflow-hidden group" }, [
+                React.createElement('div', { key: "icon", className: "absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity" }, 
+                    React.createElement(Calculator, { size: 64, className: "text-cyan-500" })
+                ),
+                React.createElement('h3', { key: "title", className: "text-2xl font-bold text-white mb-6" }, "Live Savings Calculator"),
+                React.createElement('div', { key: "sliders", className: "space-y-6 mb-8" }, [
+                    React.createElement('div', { key: "commute" }, [
+                        React.createElement('div', { className: "flex justify-between text-sm mb-2" }, [
+                            React.createElement('span', { className: "text-slate-400" }, "Daily Commute"),
+                            React.createElement('span', { className: "text-cyan-400 font-bold" }, `${dailyKm} km`)
+                        ]),
+                        React.createElement('input', { 
+                            type: "range", min: "5", max: "100", value: dailyKm, 
+                            onChange: (e) => setDailyKm(Number(e.target.value)),
+                            className: "w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                        })
+                    ]),
+                     React.createElement('div', { key: "petrol" }, [
+                        React.createElement('div', { className: "flex justify-between text-sm mb-2" }, [
+                            React.createElement('span', { className: "text-slate-400" }, "Petrol Price"),
+                            React.createElement('span', { className: "text-slate-300 font-bold" }, `₹${petrolPrice}/L`)
+                        ]),
+                        React.createElement('input', { 
+                            type: "range", min: "90", max: "120", value: petrolPrice, 
+                            onChange: (e) => setPetrolPrice(Number(e.target.value)),
+                            className: "w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-slate-500"
+                        })
+                    ])
+                ]),
+                React.createElement('div', { key: "results", className: "grid grid-cols-2 gap-4 border-t border-white/10 pt-6" }, [
+                    React.createElement('div', { key: "annual" }, [
+                        React.createElement('div', { className: "text-xs text-slate-500 uppercase tracking-wider" }, "Annual Savings"),
+                        React.createElement('div', { className: "text-2xl font-bold text-white" }, `₹${Math.round(savingsYear).toLocaleString()}`)
+                    ]),
+                    React.createElement('div', { key: "fiveyear" }, [
+                        React.createElement('div', { className: "text-xs text-slate-500 uppercase tracking-wider" }, "5-Year Savings"),
+                        React.createElement('div', { className: "text-2xl font-bold text-cyan-400" }, `₹${Math.round(savings5Years).toLocaleString()}`)
+                    ])
+                ])
+            ]);
+        };
+
+        // --- SPONSOR MODAL ---
+        const SponsorModal = ({ isOpen, onClose, initialType }) => {
+            if (!isOpen) return null;
+
+            const [formData, setFormData] = useState({ company: "", contactName: "", email: "", type: initialType || "General Support" });
+            const [status, setStatus] = useState("idle");
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setStatus("submitting");
+                try {
+                    const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                        body: JSON.stringify({ ...formData, "_subject": `New Sponsorship: ${formData.company}` })
+                    });
+                    if (response.ok) { setStatus("success"); } else { setStatus("error"); }
+                } catch (error) { setStatus("error"); }
+            };
+
+            return React.createElement('div', { className: "fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in duration-200" }, 
+                React.createElement('div', { className: "bg-[#0a0a0a] border border-white/10 w-full max-w-md rounded-2xl p-8 relative shadow-2xl" }, [
+                    React.createElement('button', { onClick: onClose, className: "absolute top-4 right-4 text-slate-500 hover:text-white transition-colors" }, React.createElement(X, { size: 24 })),
+                    status === "success" ? React.createElement('div', { className: "text-center py-10" }, [
+                        React.createElement('div', { className: "w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6" }, React.createElement(Check, { size: 32 })),
+                        React.createElement('h3', { className: "text-2xl font-bold text-white mb-2" }, "Message Sent!"),
+                        React.createElement('button', { onClick: onClose, className: "mt-8 text-sm text-cyan-400 font-bold uppercase" }, "Close")
+                    ]) : React.createElement('div', {}, [
+                        React.createElement('h3', { className: "text-2xl font-bold text-white mb-2" }, "Become a Partner"),
+                        React.createElement('p', { className: "text-slate-400 text-sm mb-6" }, "Connect with our team to support the project."),
+                        React.createElement('form', { onSubmit: handleSubmit, className: "space-y-4" }, [
+                             React.createElement('select', { 
+                                value: formData.type,
+                                onChange: (e) => setFormData({...formData, type: e.target.value}),
+                                className: "w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none appearance-none"
+                            }, ["Battery Sponsor", "Motor Partner", "Fabrication", "General Support"].map(op => React.createElement('option', {key:op, value:op}, op))),
+                            React.createElement('input', { 
+                                required: true, type: "text", placeholder: "Company Name",
+                                value: formData.company, onChange: (e) => setFormData({...formData, company: e.target.value}),
+                                className: "w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none"
+                            }),
+                            React.createElement('input', { 
+                                required: true, type: "email", placeholder: "Email Address",
+                                value: formData.email, onChange: (e) => setFormData({...formData, email: e.target.value}),
+                                className: "w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none"
+                            }),
+                            React.createElement('button', { 
+                                type: "submit", disabled: status === "submitting",
+                                className: "w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-3 rounded-lg mt-4 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                            }, status === "submitting" ? "Sending..." : ["Send Inquiry", React.createElement(ArrowRight, { size: 18 })])
+                        ])
+                    ])
+                ])
+            );
+        };
+
+        // --- NEW TELEMATICS DASHBOARD ---
+        const TelematicsDashboard = ({ onClose }) => {
+            const [loading, setLoading] = useState(true);
+            const [rpm, setRpm] = useState(0);
+            const [temp, setTemp] = useState(35);
+            const [volts, setVolts] = useState(48.2);
+
+            useEffect(() => {
+                const timer = setTimeout(() => setLoading(false), 2000);
+                
+                // Simulate telemetry data
+                const interval = setInterval(() => {
+                    setRpm(prev => Math.min(prev + (Math.random() * 200), 2500));
+                    setTemp(prev => Math.min(prev + (Math.random() - 0.4), 45));
+                    setVolts(prev => Math.max(prev - 0.01, 46));
+                }, 500);
+
+                return () => { clearTimeout(timer); clearInterval(interval); };
+            }, []);
+
+            return React.createElement('div', { className: "fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl animate-in fade-in duration-300 p-4 lg:p-8" }, [
+                React.createElement('button', {
+                    onClick: onClose,
+                    className: "absolute top-4 right-4 text-white/50 hover:text-white transition-colors z-50 p-2 hover:bg-white/10 rounded-full"
+                }, React.createElement(X, { size: 32 })),
+                
+                React.createElement('div', { className: "w-full h-full max-w-6xl mx-auto border border-white/10 rounded-2xl overflow-hidden relative shadow-[0_0_100px_rgba(6,182,212,0.1)] bg-[#0a0a0a] flex flex-col" }, [
+                    
+                    // Header
+                    React.createElement('div', { className: "p-6 border-b border-white/10 flex items-center justify-between bg-white/[0.02]" }, [
+                        React.createElement('div', { className: "flex items-center gap-3" }, [
+                            React.createElement(Activity, { className: "text-cyan-400 animate-pulse" }),
+                            React.createElement('div', {}, [
+                                React.createElement('h2', { className: "text-xl font-bold text-white tracking-tight" }, "SYSTEM TELEMETRY"),
+                                React.createElement('div', { className: "text-[10px] text-cyan-500 font-mono tracking-widest uppercase" }, "Digital Twin Connection")
+                            ])
+                        ]),
+                        React.createElement('div', { className: "flex items-center gap-2" }, [
+                             React.createElement('div', { className: `w-2 h-2 rounded-full ${loading ? 'bg-amber-500' : 'bg-green-500'} animate-pulse` }),
+                             React.createElement('span', { className: "text-xs font-mono text-slate-400" }, loading ? "ESTABLISHING LINK..." : "ONLINE")
+                        ])
+                    ]),
+
+                    // Main Content
+                    React.createElement('div', { className: "flex-1 relative overflow-hidden flex flex-col items-center justify-center p-8" }, [
+                         // Grid Background
+                         React.createElement('div', { className: "absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" }),
+                         
+                         // Scanline
+                         !loading && React.createElement('div', { className: "absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent h-[20%] w-full animate-scanline pointer-events-none" }),
+
+                         loading ? React.createElement(Loader2, { className: "w-16 h-16 text-cyan-500 animate-spin" }) : 
+                         React.createElement('div', { className: "w-full max-w-4xl z-10 grid gap-8" }, [
+                             
+                             // Central HUD
+                             React.createElement('div', { className: "flex flex-col items-center text-center mb-8" }, [
+                                 React.createElement(Hexagon, { size: 80, className: "text-cyan-500/20 mb-4 animate-spin-slow", strokeWidth: 1 }),
+                                 React.createElement('h3', { className: "text-3xl font-bold text-white mb-2" }, "Ready for Inspection"),
+                                 React.createElement('p', { className: "text-slate-400 max-w-md mx-auto" }, "Live telemetry simulation active. The high-fidelity CAD model is hosted on Autodesk's secure cloud viewer."),
+                                 
+                                 // External Link Button
+                                 React.createElement('button', {
+                                     onClick: () => window.open(AUTODESK_URL, '_blank'),
+                                     className: "mt-8 group relative bg-cyan-500 hover:bg-cyan-400 text-black px-8 py-4 rounded-full font-bold flex items-center gap-3 transition-all hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.4)]"
+                                 }, [
+                                     React.createElement(ExternalLink, { size: 20 }),
+                                     "Launch External CAD Viewer",
+                                     React.createElement('div', { className: "absolute -inset-1 rounded-full bg-cyan-400/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" })
+                                 ])
+                             ]),
+
+                             // Data Grid
+                             React.createElement('div', { className: "grid grid-cols-1 md:grid-cols-3 gap-4" }, [
+                                 React.createElement('div', { className: "bg-black/40 border border-white/10 p-4 rounded-xl backdrop-blur-md" }, [
+                                     React.createElement('div', { className: "flex items-center gap-2 text-slate-400 text-xs uppercase font-bold mb-2" }, [React.createElement(Gauge, { size: 14 }), "Motor Speed"]),
+                                     React.createElement('div', { className: "text-3xl font-mono text-cyan-400" }, [Math.round(rpm), React.createElement('span', { className: "text-sm text-slate-500 ml-1" }, "RPM")])
+                                 ]),
+                                 React.createElement('div', { className: "bg-black/40 border border-white/10 p-4 rounded-xl backdrop-blur-md" }, [
+                                     React.createElement('div', { className: "flex items-center gap-2 text-slate-400 text-xs uppercase font-bold mb-2" }, [React.createElement(Thermometer, { size: 14 }), "Pack Temp"]),
+                                     React.createElement('div', { className: "text-3xl font-mono text-amber-400" }, [temp.toFixed(1), React.createElement('span', { className: "text-sm text-slate-500 ml-1" }, "°C")])
+                                 ]),
+                                 React.createElement('div', { className: "bg-black/40 border border-white/10 p-4 rounded-xl backdrop-blur-md" }, [
+                                     React.createElement('div', { className: "flex items-center gap-2 text-slate-400 text-xs uppercase font-bold mb-2" }, [React.createElement(Zap, { size: 14 }), "Voltage"]),
+                                     React.createElement('div', { className: "text-3xl font-mono text-emerald-400" }, [volts.toFixed(1), React.createElement('span', { className: "text-sm text-slate-500 ml-1" }, "V")])
+                                 ])
+                             ])
+                         ])
+                    ])
+                ])
+            ]);
+        };
+
+        // --- TEAM DETAIL MODAL ---
+        const TeamDetailModal = ({ group, onClose }) => {
+            if (!group) return null;
+            return React.createElement('div', { className: "fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 animate-in fade-in duration-300" }, 
+                React.createElement('div', { className: "w-full max-w-5xl h-[85vh] flex flex-col bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden relative shadow-2xl" }, [
+                    React.createElement('div', { key: "header", className: "p-6 border-b border-white/10 flex justify-between items-center bg-white/[0.02]" }, [
+                        React.createElement('div', { key: "info", className: "flex items-center gap-4" }, [
+                            React.createElement('div', { key: "icon", className: `p-3 bg-white/5 rounded-xl ${group.color}` }, React.createElement(group.icon, { size: 32 })),
+                            React.createElement('div', { key: "text" }, [
+                                React.createElement('h2', { className: "text-2xl font-bold text-white" }, group.title),
+                                React.createElement('div', { className: "text-xs text-slate-500 font-mono tracking-widest uppercase" }, [group.code, " • ", group.desc])
+                            ])
+                        ]),
+                        React.createElement('button', { onClick: onClose, className: "p-2 text-slate-500 hover:text-white hover:bg-white/10 rounded-full transition-all" }, React.createElement(X, { size: 24 }))
+                    ]),
+                    React.createElement('div', { key: "grid", className: "flex-1 overflow-y-auto p-6 md:p-8" }, 
+                        React.createElement('div', { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" }, 
+                            group.members.map((member, idx) => {
+                                const [imgError, setImgError] = useState(false);
+                                return React.createElement('div', { 
+                                    key: idx, 
+                                    className: "bg-white/[0.03] border border-white/5 rounded-xl p-6 hover:border-white/20 transition-all duration-300 group/card flex flex-col"
+                                }, [
+                                    React.createElement('div', { key: "img", className: "aspect-square w-32 rounded-full bg-gradient-to-br from-slate-800 to-black border border-white/10 mb-6 flex items-center justify-center relative overflow-hidden mx-auto md:mx-0" }, [
+                                        (member.image && !imgError) ? 
+                                            React.createElement('img', { src: member.image, alt: member.name, className: `w-full h-full object-cover ${member.imagePosition || 'object-center'}`, onError: () => setImgError(true) }) :
+                                            React.createElement(User, { size: 48, className: `text-slate-600 group-hover/card:${group.color} transition-colors duration-500` }),
+                                        React.createElement('div', { className: `absolute inset-0 bg-${group.color.split('-')[1]}-500/20 blur-xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none` })
+                                    ]),
+                                    React.createElement('div', { key: "info", className: "text-center md:text-left" }, [
+                                        React.createElement('h4', { className: "text-xl font-bold text-white mb-1" }, member.name),
+                                        React.createElement('div', { className: `text-xs font-bold uppercase tracking-wider mb-4 ${group.color}` }, member.role),
+                                        React.createElement('div', { className: "h-px w-full bg-white/5 mb-4" }),
+                                        React.createElement('p', { className: "text-sm text-slate-400 leading-relaxed" }, member.desc)
+                                    ])
+                                ]);
+                            })
+                        )
+                    )
+                ])
+            );
+        };
+
+        // --- PARTICLE BACKGROUND ---
+        const ParticleBackground = () => {
+            const canvasRef = useRef(null);
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                const ctx = canvas.getContext('2d');
+                let width, height;
+                let particles = [];
+
+                const resize = () => {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                };
+                window.addEventListener('resize', resize);
+                resize();
+
+                for(let i=0; i<50; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        size: Math.random() * 2
+                    });
+                }
+
+                const animate = () => {
+                    ctx.clearRect(0, 0, width, height);
+                    ctx.fillStyle = 'rgba(6, 182, 212, 0.15)'; 
+                    particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        if(p.x < 0) p.x = width;
+                        if(p.x > width) p.x = 0;
+                        if(p.y < 0) p.y = height;
+                        if(p.y > height) p.y = 0;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    requestAnimationFrame(animate);
+                };
+                animate();
+            }, []);
+            return React.createElement('canvas', { ref: canvasRef, className: "absolute inset-0 w-full h-full pointer-events-none z-0" });
+        };
+
+        const App = () => {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
+            const [isModelOpen, setIsModelOpen] = useState(false);
+            const [sponsorModalOpen, setSponsorModalOpen] = useState(false);
+            const [selectedSponsorType, setSelectedSponsorType] = useState("General Support");
+            const [activeTeamGroup, setActiveTeamGroup] = useState(null);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const openSponsorModal = (type) => {
+                setSelectedSponsorType(type);
+                setSponsorModalOpen(true);
+            };
+
+            return React.createElement('div', { className: "min-h-screen bg-[#050505] text-slate-200 font-sans selection:bg-cyan-500/30 overflow-x-hidden" }, [
+                
+                React.createElement(SponsorModal, { key: "sponsor-modal", isOpen: sponsorModalOpen, onClose: () => setSponsorModalOpen(false), initialType: selectedSponsorType }),
+                React.createElement(TeamDetailModal, { key: "team-modal", group: activeTeamGroup, onClose: () => setActiveTeamGroup(null) }),
+                
+                // TELEMATICS DASHBOARD
+                isModelOpen && React.createElement(TelematicsDashboard, { key: "telematics", onClose: () => setIsModelOpen(false) }),
+
+                // --- NAV ---
+                React.createElement('header', { key: "nav", className: `fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-[#050505]/90 backdrop-blur-md border-b border-white/5 py-4' : 'bg-transparent py-8'}` }, [
+                    React.createElement('div', { key: "nav-container", className: "max-w-7xl mx-auto px-6 flex justify-between items-center relative z-50" }, [
+                        React.createElement('div', { key: "logo", className: "flex items-center gap-4" }, [
+                            React.createElement('div', { className: "relative group cursor-pointer" }, 
+                                GITHUB_LOGO_URL ? React.createElement('img', {
+                                    src: GITHUB_LOGO_URL,
+                                    alt: "Team Logo",
+                                    className: "w-12 h-12 object-contain transition-transform duration-1000 group-hover:rotate-180 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]"
+                                }) : React.createElement(Hexagon, { className: "w-10 h-10 text-cyan-400", strokeWidth: 2 })
+                            ),
+                            React.createElement('div', { className: "flex flex-col" }, [
+                                React.createElement('span', { className: "text-2xl font-bold tracking-tight leading-none text-white font-sans" }, ["ECOMMUT", React.createElement('span', { key: "x", className: "text-cyan-400" }, "ER")]),
+                                React.createElement('span', { className: "text-[10px] text-cyan-500/70 uppercase tracking-[0.3em] leading-none mt-1.5" }, "Team Gear Heads")
+                            ])
+                        ]),
+                        React.createElement('nav', { key: "desktop", className: "hidden lg:flex items-center gap-10 text-xs font-bold uppercase tracking-widest text-slate-400" }, [
+                            ['Engineering', 'Cost-Report', 'Team', 'Sponsors'].map(item => 
+                                React.createElement('a', { key: item, href: `#${item.toLowerCase().replace(' ', '-')}`, className: "hover:text-cyan-400 hover:-translate-y-0.5 transition-all duration-300" }, item.replace('-', ' '))
+                            ),
+                            React.createElement('button', { 
+                                onClick: () => openSponsorModal("General Support"),
+                                className: "relative overflow-hidden bg-cyan-500 hover:bg-cyan-400 text-black px-6 py-2.5 rounded-sm font-bold transition-all hover:scale-105 flex items-center gap-2 shadow-[0_0_20px_rgba(6,182,212,0.3)]" 
+                            }, React.createElement('span', { className: "absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full hover:animate-shimmer" }), "Sponsor Us")
+                        ]),
+                        React.createElement('button', { key: "mobile", className: "lg:hidden text-white p-2", onClick: () => setIsMenuOpen(!isMenuOpen) }, isMenuOpen ? React.createElement(X, { size: 28 }) : React.createElement(Menu, { size: 28 }))
+                    ]),
+                    // MOBILE MENU DROPDOWN
+                    React.createElement('div', { 
+                        key: "mobile-menu",
+                        className: `lg:hidden absolute top-full left-0 w-full bg-[#050505]/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-4 shadow-2xl transition-all duration-300 origin-top z-[100] ${isMenuOpen ? 'opacity-100 scale-y-100 translate-y-0 visible' : 'opacity-0 scale-y-95 -translate-y-4 invisible'}`
+                    }, [
+                        ['Engineering', 'Cost-Report', 'Team', 'Sponsors'].map(item => 
+                            React.createElement('a', { 
+                                key: item, 
+                                href: `#${item.toLowerCase().replace(' ', '-')}`,
+                                onClick: () => setIsMenuOpen(false),
+                                className: "block w-full text-lg font-bold uppercase tracking-widest text-slate-400 hover:text-cyan-400 py-4 border-b border-white/5 flex items-center justify-between group"
+                            }, [
+                                item.replace('-', ' '),
+                                React.createElement(ArrowRight, { size: 16, className: "opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" })
+                            ])
+                        ),
+                        React.createElement('button', { 
+                            onClick: () => { openSponsorModal("General Support"); setIsMenuOpen(false); },
+                            className: "w-full bg-cyan-500 hover:bg-cyan-400 text-black py-4 rounded-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2 mt-2" 
+                        }, "Sponsor Us")
+                    ])
+                ]),
+
+                // --- MAIN ---
+                React.createElement('main', { key: "main" }, [
+                    // HERO
+                    React.createElement('section', { key: "hero", className: "relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" }, [
+                        React.createElement(ParticleBackground),
+                        React.createElement('div', { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-600/10 rounded-full blur-[150px] z-0 animate-pulse-slow" }),
+                        React.createElement('div', { className: "max-w-6xl mx-auto px-6 text-center relative z-10" }, [
+                            React.createElement(FadeInWhenVisible, { key: "status" }, 
+                                React.createElement('div', { className: "inline-flex items-center gap-3 px-4 py-2 bg-white/[0.03] border border-white/10 text-cyan-400 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md rounded-full mb-10 shadow-lg shadow-cyan-900/20" }, [
+                                    React.createElement('span', { className: "w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" }),
+                                    "Status: Phase 2 - Procurement"
+                                ])
+                            ),
+                            React.createElement(FadeInWhenVisible, { key: "title", delay: 100 }, 
+                                React.createElement('h1', { className: "text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] text-white tracking-tighter mb-8" }, [
+                                    "Future of ", React.createElement('br', { className: "hidden md:block" }),
+                                    React.createElement('span', { className: "text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-500 to-blue-600" }, "Indian Mobility.")
+                                ])
+                            ),
+                            React.createElement(FadeInWhenVisible, { key: "desc", delay: 200 }, 
+                                React.createElement('p', { className: "text-slate-400 text-xl max-w-2xl mx-auto leading-relaxed font-light mb-12" }, [
+                                    "The ultimate student-built electric utility vehicle. Optimized for efficiency, safety, and the Indian market.",
+                                    React.createElement('br'),
+                                    React.createElement('span', { className: "text-white font-medium mt-2 block" }, "Designed for SAEINDIA ETWDC 2025.")
+                                ])
+                            ),
+                            React.createElement(FadeInWhenVisible, { key: "btns", delay: 300 }, 
+                                React.createElement('div', { className: "flex flex-col sm:flex-row gap-6 justify-center items-center" }, [
+                                    React.createElement('button', { 
+                                        onClick: () => setIsModelOpen(true),
+                                        className: "group relative bg-white text-black px-10 py-4 font-bold tracking-wide overflow-hidden hover:bg-cyan-50 transition-all text-center cursor-pointer shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(6,182,212,0.4)] rounded-full flex items-center gap-3"
+                                    }, [
+                                        React.createElement('span', { className: "relative z-10 flex items-center gap-2" }, ["Explore Engineering", React.createElement(ExternalLink, { size: 16 })]),
+                                        React.createElement('div', { className: "absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" })
+                                    ]),
+                                    React.createElement('a', { 
+                                        href: "https://raw.githubusercontent.com/Sripriya10/portfolio-assets/main/ETWDC2526023_TeamGearHeads_final.pdf",
+                                        target: "_blank", rel: "noopener noreferrer",
+                                        className: "px-10 py-4 border border-white/10 hover:border-cyan-400/50 hover:bg-white/5 text-white font-bold tracking-wide transition-all flex items-center gap-3 group justify-center rounded-full backdrop-blur-sm"
+                                    }, ["View Design Report", React.createElement(Download, { size: 16 })])
+                                ])
+                            ),
+                            React.createElement(FadeInWhenVisible, { key: "metrics", delay: 500 }, 
+                                React.createElement('div', { className: "mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-12" }, 
+                                    HERO_METRICS.map((m, i) => React.createElement('div', { key: i, className: "group cursor-default" }, [
+                                        React.createElement('div', { className: "text-4xl md:text-5xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300 font-sans" }, [m.value, React.createElement('span', { className: "text-lg text-slate-500 align-top ml-1 font-medium" }, m.unit)]),
+                                        React.createElement('div', { className: "text-[10px] uppercase tracking-[0.2em] text-slate-500 group-hover:text-slate-300 transition-colors" }, m.label)
+                                    ]))
+                                )
+                            )
+                        ])
+                    ]),
+
+                    // ENGINEERING
+                    React.createElement('section', { key: "eng", id: "engineering", className: "py-32 bg-[#050505] relative border-t border-white/5" }, [
+                        React.createElement('div', { className: "max-w-7xl mx-auto px-6" }, [
+                            React.createElement(FadeInWhenVisible, { key: "header" }, 
+                                React.createElement('div', { className: "flex flex-col md:flex-row justify-between items-end mb-20 gap-6" }, [
+                                    React.createElement('div', null, [
+                                        React.createElement('h2', { className: "text-sm font-bold text-cyan-400 uppercase tracking-[0.3em] mb-4" }, "Design Validation"),
+                                        React.createElement('h3', { className: "text-4xl lg:text-5xl font-bold text-white tracking-tight" }, "Engineering Report")
+                                    ]),
+                                    React.createElement('div', { className: "text-right hidden md:block" }, [
+                                        React.createElement('div', { className: "text-xs text-slate-500 uppercase tracking-widest mb-2" }, "Team Strategy"),
+                                        React.createElement('div', { className: "text-white font-mono text-lg border-b border-cyan-500/50 pb-1 inline-block" }, "Frugal & Efficient")
+                                    ])
+                                ])
+                            ),
+                            React.createElement('div', { className: "grid grid-cols-1 md:grid-cols-3 gap-6" }, 
+                                ENGINEERING_SPECS.map((item, idx) => React.createElement(FadeInWhenVisible, { key: idx, delay: idx * 100, className: `${item.size === 'large' ? 'md:col-span-2' : ''} ${item.size === 'medium' ? 'md:col-span-1' : ''}` }, React.createElement(TiltCard, { className: "h-full flex flex-col justify-between p-8 group" }, [
+                                    React.createElement('div', { key: "top", className: "flex justify-between items-start mb-6" }, [
+                                        React.createElement('div', { className: "w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 rounded-lg group-hover:scale-110 transition-all duration-300" }, React.createElement(item.icon, { size: 24 })),
+                                        item.size !== 'small' && React.createElement('div', { className: "text-[10px] font-mono text-slate-600 group-hover:text-cyan-500/50 transition-colors" }, `SPEC // 0${idx + 1}`)
+                                    ]),
+                                    React.createElement('div', { key: "mid" }, [
+                                        React.createElement('div', { className: "text-xs text-cyan-500 font-mono mb-2 uppercase tracking-wider" }, item.subtitle),
+                                        React.createElement('h4', { className: "text-2xl font-bold text-white mb-3 tracking-tight" }, item.title),
+                                        React.createElement('p', { className: "text-slate-400 text-sm leading-relaxed max-w-sm" }, item.desc)
+                                    ]),
+                                    item.stats && React.createElement('div', { key: "stats", className: "mt-8 grid grid-cols-2 gap-4 border-t border-white/5 pt-4" }, 
+                                        item.stats.map((s, si) => React.createElement('div', { key: si }, [
+                                            React.createElement('div', { className: "flex justify-between text-[10px] uppercase text-slate-500 mb-1" }, [
+                                                React.createElement('span', null, s.label),
+                                                React.createElement('span', { className: "text-white font-mono" }, s.value)
+                                            ]),
+                                            React.createElement('div', { className: "h-1 bg-white/10 rounded-full overflow-hidden" }, 
+                                                React.createElement('div', { className: "h-full bg-cyan-500/50 group-hover:bg-cyan-400 transition-all duration-1000 ease-out", style: { width: `${s.curr}%` } })
+                                            )
+                                        ]))
+                                    )
+                                ])))
+                            )
+                        ])
+                    ]),
+
+                    // COST REPORT
+                    React.createElement('section', { key: "cost", id: "cost-report", className: "py-32 bg-[#050505] border-t border-white/5" }, 
+                        React.createElement('div', { className: "max-w-7xl mx-auto px-6" }, 
+                            React.createElement(FadeInWhenVisible, {}, 
+                                React.createElement('div', { className: "grid md:grid-cols-2 gap-16 items-center" }, [
+                                    React.createElement('div', {}, [
+                                        React.createElement('h2', { className: "text-sm font-bold text-cyan-400 uppercase tracking-[0.3em] mb-4" }, "Business Case"),
+                                        React.createElement('h3', { className: "text-4xl font-bold text-white mb-6" }, "Cost & Market Viability"),
+                                        React.createElement('p', { className: "text-slate-400 text-lg mb-8 leading-relaxed" }, "By standardizing components like the 48V battery pack and 1kW BLDC motor, we have achieved an incredibly low BOM cost while maintaining performance."),
+                                        React.createElement('div', { className: "grid grid-cols-2 gap-4" }, [
+                                            React.createElement('div', { className: "p-6 rounded-xl bg-white/5 border border-white/10" }, [
+                                                React.createElement('div', { className: "text-3xl font-bold text-white mb-1" }, "₹58,449"),
+                                                React.createElement('div', { className: "text-xs text-slate-500 uppercase tracking-widest" }, "Total Build Cost")
+                                            ]),
+                                            React.createElement('div', { className: "p-6 rounded-xl bg-white/5 border border-white/10" }, [
+                                                React.createElement('div', { className: "text-3xl font-bold text-white mb-1" }, "₹85,000"),
+                                                React.createElement('div', { className: "text-xs text-slate-500 uppercase tracking-widest" }, "Target Retail Price")
+                                            ])
+                                        ])
+                                    ]),
+                                    React.createElement('div', { className: "relative" }, React.createElement(ROICalculator))
+                                ])
+                            )
+                        )
+                    ),
+
+                    // TEAM
+                    React.createElement('section', { key: "team", id: "team", className: "py-32 bg-[#050505] border-t border-white/5" }, 
+                        React.createElement('div', { className: "max-w-7xl mx-auto px-6" }, [
+                            React.createElement(FadeInWhenVisible, {}, 
+                                React.createElement('div', { className: "text-center mb-20" }, [
+                                    React.createElement('h2', { className: "text-sm font-bold text-cyan-400 uppercase tracking-[0.3em] mb-4" }, "The Innovators"),
+                                    React.createElement('h3', { className: "text-4xl font-bold text-white" }, "Meet Team Gear Heads")
+                                ])
+                            ),
+                            React.createElement('div', { className: "grid md:grid-cols-2 lg:grid-cols-4 gap-6" }, 
+                                TEAM_GROUPS.map((group, i) => React.createElement(FadeInWhenVisible, { key: i, delay: i * 100 }, 
+                                    React.createElement(TechCard, { group: group, onClick: () => setActiveTeamGroup(group) })
+                                ))
+                            )
+                        ])
+                    ),
+
+                    // SPONSORS
+                    React.createElement('section', { key: "sponsors", id: "sponsors", className: "py-32 bg-[#050505] border-t border-white/5 relative overflow-hidden" }, [
+                        React.createElement('div', { className: "absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" }),
+                        React.createElement('div', { className: "max-w-7xl mx-auto px-6" }, [
+                            React.createElement(FadeInWhenVisible, {}, 
+                                React.createElement('div', { className: "text-center mb-20" }, [
+                                    React.createElement('h2', { className: "text-sm font-bold text-cyan-400 uppercase tracking-[0.3em] mb-4" }, "Join Our Mission"),
+                                    React.createElement('h3', { className: "text-4xl font-bold text-white" }, "Ways to Collaborate"),
+                                    React.createElement('p', { className: "text-slate-400 mt-4 max-w-2xl mx-auto" }, "We are looking for strategic partners to help us fabricate our beta prototype for the ETWDC 2025 final round.")
+                                ])
+                            ),
+                            React.createElement('div', { className: "grid md:grid-cols-3 gap-8" }, 
+                                PARTNERSHIP_OPPORTUNITIES.map((item, idx) => React.createElement(FadeInWhenVisible, { key: idx, delay: idx * 150 }, 
+                                    React.createElement(TiltCard, { className: "h-full p-8 flex flex-col items-center text-center hover:bg-white/[0.04]" }, [
+                                        React.createElement('div', { className: "w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mb-6 text-cyan-400" }, React.createElement(item.icon, { size: 32 })),
+                                        React.createElement('h4', { className: "text-xl font-bold text-white mb-3" }, item.title),
+                                        React.createElement('p', { className: "text-slate-400 text-sm leading-relaxed mb-8 flex-1" }, item.desc),
+                                        React.createElement('button', { 
+                                            onClick: () => openSponsorModal(item.title),
+                                            className: "w-full py-3 border border-white/10 bg-white/5 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-cyan-500 hover:text-black transition-all" 
+                                        }, item.cta)
+                                    ])
+                                ))
+                            )
+                        ])
+                    ]),
+
+                    // ROADMAP
+                    React.createElement('section', { key: "roadmap", id: "roadmap", className: "py-32 bg-[#050505] border-t border-white/5 relative" }, [
+                         React.createElement('div', { className: "max-w-5xl mx-auto px-6" }, [
+                             React.createElement(FadeInWhenVisible, {}, 
+                                 React.createElement('div', { className: "text-center mb-24" }, [
+                                     React.createElement('h2', { className: "text-4xl font-bold text-white tracking-tight mb-4" }, "Competition Roadmap"),
+                                     React.createElement('p', { className: "text-slate-400" }, "Timeline to ETWDC Final Round")
+                                 ])
+                             ),
+                             React.createElement('div', { className: "relative" }, [
+                                 React.createElement('div', { className: "absolute left-[20px] md:left-[50%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-cyan-900/50 to-transparent -translate-x-1/2" }),
+                                 React.createElement('div', { className: "space-y-12" }, 
+                                     ROADMAP_STEPS.map((step, index) => React.createElement(FadeInWhenVisible, { key: index, delay: index * 150 }, 
+                                         React.createElement('div', { className: `flex flex-col md:flex-row items-center w-full group ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}` }, [
+                                             React.createElement('div', { className: `w-full md:w-1/2 pl-12 md:px-12 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} text-left relative` }, [
+                                                 React.createElement('div', { className: `inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-3 ${step.status === 'completed' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : step.status === 'current' ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 animate-pulse' : 'bg-white/5 text-slate-500 border border-white/5'}` }, step.date),
+                                                 React.createElement('h3', { className: "text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors" }, step.title),
+                                                 React.createElement('p', { className: "text-slate-400 text-sm max-w-sm mx-0 md:mx-auto inline-block leading-relaxed" }, step.desc)
+                                             ]),
+                                             React.createElement('div', { className: "absolute left-[20px] md:left-[50%] -translate-x-1/2 flex items-center justify-center w-8 h-8 shrink-0" }, 
+                                                 React.createElement('div', { className: `w-3 h-3 rounded-full z-10 transition-all duration-500 ${step.status === 'current' ? 'bg-cyan-400 shadow-[0_0_20px_#22d3ee] scale-125 ring-4 ring-black' : 'bg-slate-800 ring-4 ring-[#050505]'}` })
+                                             ),
+                                             React.createElement('div', { className: "w-full md:w-1/2 hidden md:block" })
+                                         ])
+                                     ))
+                                 )
+                             ])
+                         ])
+                    ])
+                ]),
+                React.createElement('footer', { key: "footer", className: "bg-black border-t border-white/10 pt-24 pb-12" }, [
+                     React.createElement('div', { className: "max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 mb-20" }, [
+                         React.createElement('div', {}, [
+                             React.createElement('h2', { className: "text-5xl font-bold text-white mb-8 tracking-tighter" }, "Support Innovation."),
+                             React.createElement('p', { className: "text-slate-400 mb-10 max-w-md text-lg font-light" }, "We are looking for sponsors to help us fabricate our beta prototype for the final round."),
+                             React.createElement('div', { className: "flex flex-col sm:flex-row gap-4" }, [
+                                 React.createElement('button', { 
+                                    onClick: () => openSponsorModal("General Support"),
+                                    className: "bg-white text-black px-8 py-4 font-bold hover:bg-cyan-400 transition-colors rounded-full flex items-center justify-center gap-2"
+                                 }, ['Contact Us', React.createElement(ArrowRight, { size: 18 })])
+                             ])
+                         ]),
+                         React.createElement('div', { className: "grid grid-cols-2 gap-12 text-sm text-slate-400" }, [
+                             React.createElement('div', {}, [
+                                 React.createElement('h4', { className: "text-white font-bold uppercase tracking-widest mb-6" }, "Competition"),
+                                 React.createElement('ul', { className: "space-y-4" }, [
+                                     React.createElement('li', {}, React.createElement('a', { href: "https://raw.githubusercontent.com/Sripriya10/portfolio-assets/main/7th%20edition%20ETWDC%20Rulebook.pdf", target: "_blank", className: "inline-flex items-center gap-2 bg-white/10 hover:bg-cyan-500 hover:text-black text-white px-4 py-2 rounded-md transition-all font-bold uppercase tracking-wider text-xs border border-white/10" }, [React.createElement(Download, { size: 14 }), "Download Rulebook"])),
+                                     React.createElement('li', {}, React.createElement('a', { href: "https://saeiss.org/", target: "_blank", className: "hover:text-cyan-400 transition-colors flex items-center gap-2" }, [React.createElement(ArrowRight, { size: 12 }), "SAEINDIA Website"]))
+                                 ])
+                             ])
+                         ])
+                     ]),
+                     React.createElement('div', { className: "max-w-7xl mx-auto px-6 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-600 gap-4" }, [
+                         React.createElement('p', {}, "© 2025 Ecommuter by Team Gear Heads. All Rights Reserved."),
+                         React.createElement('div', { className: "flex gap-6" }, [React.createElement('span', {}, "Made for ETWDC"), React.createElement('span', {}, "Team ID: 2526023")])
+                     ])
+                ])
+            ]);
+        };
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(React.createElement(App));
+    </script>
+</body>
+</html>
